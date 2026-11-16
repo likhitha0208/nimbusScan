@@ -1,0 +1,21 @@
+{
+  "scan_time": "2026-11-17T09:00:00+00:00",
+  "region": "us-east-1",
+  "guardduty_enabled": true,
+  "findings_scanned": 2,
+  "findings": [
+    {
+      "type": "UnauthorizedAccess:EC2/SSHBruteForce",
+      "severity": 5.0,
+      "resource": "i-0demo00000000001",
+      "risk": "MEDIUM"
+    },
+    {
+      "type": "Recon:EC2/PortProbeUnprotectedPort",
+      "severity": 2.0,
+      "resource": "i-0demo00000000002",
+      "risk": "LOW"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

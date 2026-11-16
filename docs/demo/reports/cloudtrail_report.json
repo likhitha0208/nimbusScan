@@ -1,0 +1,27 @@
+{
+  "scan_time": "2026-11-17T09:00:00+00:00",
+  "region": "us-east-1",
+  "period": "Last 7 days",
+  "events_scanned": 412,
+  "findings": [
+    {
+      "event": "ConsoleLogin",
+      "identity": "demo_developer",
+      "reason": "Console login without MFA",
+      "risk": "MEDIUM"
+    },
+    {
+      "event": "ListDetectors",
+      "identity": "demo_developer",
+      "reason": "API operation failed: AccessDenied",
+      "risk": "REVIEW"
+    },
+    {
+      "event": "GetSecretValue",
+      "identity": "demo_developer",
+      "reason": "API operation failed: AccessDenied",
+      "risk": "REVIEW"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

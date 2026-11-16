@@ -1,0 +1,35 @@
+{
+  "scan_time": "2026-11-17T09:00:00+00:00",
+  "region": "us-east-1",
+  "recorders": [
+    {
+      "name": "default"
+    }
+  ],
+  "recording_status": [
+    {
+      "recording": true
+    }
+  ],
+  "rules_scanned": 5,
+  "compliance_summary": {
+    "COMPLIANT": 3,
+    "NON_COMPLIANT": 2,
+    "INSUFFICIENT_DATA": 0,
+    "OTHER": 0
+  },
+  "rules": [],
+  "findings": [
+    {
+      "rule": "s3-bucket-ssl-requests-only",
+      "compliance": "NON_COMPLIANT",
+      "risk": "MEDIUM"
+    },
+    {
+      "rule": "iam-user-unused-credentials-check",
+      "compliance": "NON_COMPLIANT",
+      "risk": "LOW"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

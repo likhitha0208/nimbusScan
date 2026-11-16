@@ -1,0 +1,37 @@
+{
+  "scan_time": "2026-11-17T09:00:00+00:00",
+  "users_scanned": 2,
+  "roles_scanned": 5,
+  "findings": [
+    {
+      "identity": "demo_admin",
+      "check": "Administrator access",
+      "policy": "AdministratorAccess",
+      "risk": "HIGH"
+    },
+    {
+      "identity": "demo_developer",
+      "check": "MFA",
+      "risk": "MEDIUM"
+    },
+    {
+      "identity": "demo_developer",
+      "check": "Access key age",
+      "age_days": 142,
+      "risk": "LOW"
+    },
+    {
+      "identity": "demo_developer",
+      "check": "Service-wide permissions",
+      "policy": "AmazonEC2FullAccess",
+      "risk": "REVIEW"
+    },
+    {
+      "identity": "demo_developer",
+      "check": "Wildcard resource",
+      "policy": "AmazonS3FullAccess",
+      "risk": "REVIEW"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

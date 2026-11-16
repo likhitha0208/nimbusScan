@@ -1,0 +1,310 @@
+{
+  "project": "NimbusScan (sample data)",
+  "analysis_time": "2026-11-17T09:00:00+00:00",
+  "input_file": "combined_security_report.json",
+  "summary": {
+    "total_findings": 16,
+    "critical": 0,
+    "high": 3,
+    "medium": 5,
+    "low": 3,
+    "review": 5,
+    "informational": 0
+  },
+  "service_summary": {
+    "SCAN": {
+      "findings_count": 1,
+      "status": "FINDINGS DETECTED"
+    },
+    "NACL": {
+      "findings_count": 1,
+      "status": "FINDINGS DETECTED"
+    },
+    "S3": {
+      "findings_count": 2,
+      "status": "FINDINGS DETECTED"
+    },
+    "IAM": {
+      "findings_count": 5,
+      "status": "FINDINGS DETECTED"
+    },
+    "CLOUDTRAIL": {
+      "findings_count": 3,
+      "status": "FINDINGS DETECTED"
+    },
+    "GUARDDUTY": {
+      "findings_count": 2,
+      "status": "FINDINGS DETECTED"
+    },
+    "CONFIG": {
+      "findings_count": 2,
+      "status": "FINDINGS DETECTED"
+    }
+  },
+  "findings": [
+    {
+      "service": "SCAN",
+      "severity": "HIGH",
+      "original_risk": "HIGH",
+      "identity": null,
+      "resource": "sg-0demo000000000001",
+      "description": "Security group allows SSH (22) from 0.0.0.0/0",
+      "recommendation": "Restrict SSH to a trusted CIDR or use AWS Systems Manager Session Manager.",
+      "validation_required": false,
+      "source_finding": {
+        "group_id": "sg-0demo000000000001",
+        "vpc_id": "vpc-0demo000000000001",
+        "port": 22,
+        "protocol": "tcp",
+        "source": "0.0.0.0/0",
+        "risk": "HIGH"
+      }
+    },
+    {
+      "service": "NACL",
+      "severity": "REVIEW",
+      "original_risk": "REVIEW",
+      "identity": null,
+      "resource": "acl-0demo000000000001",
+      "description": "All inbound traffic allowed from the internet",
+      "recommendation": "Inspect the NACL rule and whether this is the default NACL. Restrict unnecessary inbound traffic if appropriate.",
+      "validation_required": true,
+      "source_finding": {
+        "acl_id": "acl-0demo000000000001",
+        "vpc_id": "vpc-0demo000000000001",
+        "is_default": true,
+        "rule_number": 100,
+        "direction": "INBOUND",
+        "action": "allow",
+        "protocol_name": "ALL",
+        "source": "0.0.0.0/0",
+        "risk": "REVIEW"
+      }
+    },
+    {
+      "service": "S3",
+      "severity": "HIGH",
+      "original_risk": "HIGH",
+      "identity": null,
+      "resource": "demo-public-assets",
+      "description": "Bucket has Block Public Access disabled",
+      "recommendation": "Enable S3 Block Public Access unless the bucket must be public, and review the bucket policy and ACL.",
+      "validation_required": false,
+      "source_finding": {
+        "bucket": "demo-public-assets",
+        "check": "Public Access Block",
+        "risk": "HIGH"
+      }
+    },
+    {
+      "service": "S3",
+      "severity": "MEDIUM",
+      "original_risk": "MEDIUM",
+      "identity": null,
+      "resource": "demo-app-logs",
+      "description": "Bucket has no default encryption configured",
+      "recommendation": "Enable default encryption (SSE-S3 or SSE-KMS) on the bucket.",
+      "validation_required": false,
+      "source_finding": {
+        "bucket": "demo-app-logs",
+        "check": "Encryption",
+        "risk": "MEDIUM"
+      }
+    },
+    {
+      "service": "IAM",
+      "severity": "HIGH",
+      "original_risk": "HIGH",
+      "identity": "demo_admin",
+      "resource": null,
+      "description": "Identity has AdministratorAccess attached",
+      "recommendation": "Replace AdministratorAccess with least-privilege policies scoped to the tasks this identity needs.",
+      "validation_required": false,
+      "source_finding": {
+        "identity": "demo_admin",
+        "check": "Administrator access",
+        "policy": "AdministratorAccess",
+        "risk": "HIGH"
+      }
+    },
+    {
+      "service": "IAM",
+      "severity": "MEDIUM",
+      "original_risk": "MEDIUM",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "IAM user has no MFA device",
+      "recommendation": "Require MFA for all IAM users that can sign in to the console.",
+      "validation_required": false,
+      "source_finding": {
+        "identity": "demo_developer",
+        "check": "MFA",
+        "risk": "MEDIUM"
+      }
+    },
+    {
+      "service": "IAM",
+      "severity": "LOW",
+      "original_risk": "LOW",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "Access key is older than 90 days",
+      "recommendation": "Rotate access keys at least every 90 days and delete unused keys.",
+      "validation_required": false,
+      "source_finding": {
+        "identity": "demo_developer",
+        "check": "Access key age",
+        "age_days": 142,
+        "risk": "LOW"
+      }
+    },
+    {
+      "service": "IAM",
+      "severity": "REVIEW",
+      "original_risk": "REVIEW",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "AmazonEC2FullAccess contains broad action ec2:*",
+      "recommendation": "Review whether service-wide permissions are required; narrow the actions where possible.",
+      "validation_required": true,
+      "source_finding": {
+        "identity": "demo_developer",
+        "check": "Service-wide permissions",
+        "policy": "AmazonEC2FullAccess",
+        "risk": "REVIEW"
+      }
+    },
+    {
+      "service": "IAM",
+      "severity": "REVIEW",
+      "original_risk": "REVIEW",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "AmazonS3FullAccess applies to all resources",
+      "recommendation": "Review whether wildcard resources are required; scope the policy to specific resources.",
+      "validation_required": true,
+      "source_finding": {
+        "identity": "demo_developer",
+        "check": "Wildcard resource",
+        "policy": "AmazonS3FullAccess",
+        "risk": "REVIEW"
+      }
+    },
+    {
+      "service": "CLOUDTRAIL",
+      "severity": "MEDIUM",
+      "original_risk": "MEDIUM",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "Console login without MFA",
+      "recommendation": "Confirm the sign-in was expected and enforce MFA for the user.",
+      "validation_required": false,
+      "source_finding": {
+        "event": "ConsoleLogin",
+        "identity": "demo_developer",
+        "reason": "Console login without MFA",
+        "risk": "MEDIUM"
+      }
+    },
+    {
+      "service": "CLOUDTRAIL",
+      "severity": "REVIEW",
+      "original_risk": "REVIEW",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "API operation failed: AccessDenied (ListDetectors)",
+      "recommendation": "Check whether the denied call was expected for this identity.",
+      "validation_required": true,
+      "source_finding": {
+        "event": "ListDetectors",
+        "identity": "demo_developer",
+        "reason": "API operation failed: AccessDenied",
+        "risk": "REVIEW"
+      }
+    },
+    {
+      "service": "CLOUDTRAIL",
+      "severity": "REVIEW",
+      "original_risk": "REVIEW",
+      "identity": "demo_developer",
+      "resource": null,
+      "description": "API operation failed: AccessDenied (GetSecretValue)",
+      "recommendation": "Check whether the denied call was expected for this identity.",
+      "validation_required": true,
+      "source_finding": {
+        "event": "GetSecretValue",
+        "identity": "demo_developer",
+        "reason": "API operation failed: AccessDenied",
+        "risk": "REVIEW"
+      }
+    },
+    {
+      "service": "GUARDDUTY",
+      "severity": "MEDIUM",
+      "original_risk": "MEDIUM",
+      "identity": null,
+      "resource": "i-0demo00000000001",
+      "description": "UnauthorizedAccess:EC2/SSHBruteForce",
+      "recommendation": "Investigate the instance and restrict SSH exposure. (Sample finding.)",
+      "validation_required": false,
+      "source_finding": {
+        "type": "UnauthorizedAccess:EC2/SSHBruteForce",
+        "severity": 5.0,
+        "resource": "i-0demo00000000001",
+        "risk": "MEDIUM"
+      }
+    },
+    {
+      "service": "GUARDDUTY",
+      "severity": "LOW",
+      "original_risk": "LOW",
+      "identity": null,
+      "resource": "i-0demo00000000002",
+      "description": "Recon:EC2/PortProbeUnprotectedPort",
+      "recommendation": "Review security group rules for the probed port. (Sample finding.)",
+      "validation_required": false,
+      "source_finding": {
+        "type": "Recon:EC2/PortProbeUnprotectedPort",
+        "severity": 2.0,
+        "resource": "i-0demo00000000002",
+        "risk": "LOW"
+      }
+    },
+    {
+      "service": "CONFIG",
+      "severity": "MEDIUM",
+      "original_risk": "MEDIUM",
+      "identity": null,
+      "resource": "s3-bucket-ssl-requests-only",
+      "description": "Config rule NON_COMPLIANT: s3-bucket-ssl-requests-only",
+      "recommendation": "Add a bucket policy that denies requests not using HTTPS.",
+      "validation_required": false,
+      "source_finding": {
+        "rule": "s3-bucket-ssl-requests-only",
+        "compliance": "NON_COMPLIANT",
+        "risk": "MEDIUM"
+      }
+    },
+    {
+      "service": "CONFIG",
+      "severity": "LOW",
+      "original_risk": "LOW",
+      "identity": null,
+      "resource": "iam-user-unused-credentials-check",
+      "description": "Config rule NON_COMPLIANT: iam-user-unused-credentials-check",
+      "recommendation": "Disable or remove credentials that have not been used recently.",
+      "validation_required": false,
+      "source_finding": {
+        "rule": "iam-user-unused-credentials-check",
+        "compliance": "NON_COMPLIANT",
+        "risk": "LOW"
+      }
+    }
+  ],
+  "limitations": [
+    "SAMPLE DATA: every resource, identity and finding here is fictional.",
+    "Analysis uses existing scanner reports.",
+    "REVIEW findings need manual validation and are not confirmed vulnerabilities."
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

@@ -1,0 +1,20 @@
+{
+  "scan_time_utc": "2026-11-17T09:00:00+00:00",
+  "region": "us-east-1",
+  "network_acl_count": 1,
+  "rules_checked": 4,
+  "findings": [
+    {
+      "acl_id": "acl-0demo000000000001",
+      "vpc_id": "vpc-0demo000000000001",
+      "is_default": true,
+      "rule_number": 100,
+      "direction": "INBOUND",
+      "action": "allow",
+      "protocol_name": "ALL",
+      "source": "0.0.0.0/0",
+      "risk": "REVIEW"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

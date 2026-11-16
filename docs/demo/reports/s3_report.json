@@ -1,0 +1,18 @@
+{
+  "scan_time": "2026-11-17T09:00:00+00:00",
+  "region": "us-east-1",
+  "buckets_scanned": 2,
+  "findings": [
+    {
+      "bucket": "demo-public-assets",
+      "check": "Public Access Block",
+      "risk": "HIGH"
+    },
+    {
+      "bucket": "demo-app-logs",
+      "check": "Encryption",
+      "risk": "MEDIUM"
+    }
+  ],
+  "sample_data_notice": "SAMPLE DATA - fictional resources, not a real AWS account"
+}

@@ -8,6 +8,12 @@ A read-only security scanner for an AWS account, built with Python and boto3, wi
 
 It runs seven scanners, merges their JSON output, classifies the findings by severity, and shows everything in a dark SOC-style dashboard.
 
+## Live demo
+
+**https://likhitha0208.github.io/nimbusScan/demo/**
+
+A hosted copy of the dashboard running on **fictional sample data** (fake resources, identities and findings, clearly tagged "DEMO · SAMPLE DATA"). It exists so you can explore the interface without an AWS account. Your own scans run locally and never leave your machine. The demo lives in [`docs/demo`](docs/demo).
+
 ## Screenshots
 
 **Dashboard**: security overview, severity distribution and per-service scan status.
@@ -78,6 +84,10 @@ The reports contain real account details, so the local server is locked down: it
 - GuardDuty and AWS Config are paid/optional services. If they are not enabled, nothing is scanned for them, which is *not* the same as a clean result.
 - Scans cover one region at a time (set in each script).
 - The dashboard shows the last scan only; it does not poll AWS live.
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ## Safety
 

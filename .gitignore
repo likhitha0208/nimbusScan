@@ -1,6 +1,8 @@
 # Scan output contains real AWS account details - never commit
 reports/
 ss/
+# ...except the fictional sample reports used by the GitHub Pages demo
+!docs/demo/reports/
 
 # Python
 __pycache__/
