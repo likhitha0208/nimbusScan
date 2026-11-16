@@ -8,6 +8,20 @@ A read-only security scanner for an AWS account, built with Python and boto3, wi
 
 It runs seven scanners, merges their JSON output, classifies the findings by severity, and shows everything in a dark SOC-style dashboard.
 
+## Screenshots
+
+**Dashboard**: security overview, severity distribution and per-service scan status.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+**Scan Results**: one row per scanner with status, scan date, resources and findings.
+
+![Scan Results](docs/screenshots/scan-results.png)
+
+**AWS Services**: a card per service; services that are not enabled are flagged as not evaluated.
+
+![AWS Services](docs/screenshots/aws-services.png)
+
 ## What it scans
 
 | Scanner | Script | Checks |
