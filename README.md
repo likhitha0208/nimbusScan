@@ -2,6 +2,8 @@
 
 *AWS Cloud Network Security Scanner*
 
+**Repository:** https://github.com/likhitha0208/nimbusScan
+
 A read-only security scanner for an AWS account, built with Python and boto3, with a local web dashboard for reviewing the results.
 
 It runs seven scanners, merges their JSON output, classifies the findings by severity, and shows everything in a dark SOC-style dashboard.
@@ -38,6 +40,10 @@ python dashboard.py --scan   # scan first, then open the dashboard
 ```
 
 Reports are written to `reports/` (git-ignored).
+
+### Opening the dashboard
+
+The dashboard is not hosted online; it runs on your own machine at `http://127.0.0.1:8000/dashboard.html`. Start it with `python dashboard.py`, which opens your browser through a one-time access link. Opening the address directly (or from a bookmark) shows "Access denied" by design, because the reports contain real account details. Run the command again to get a fresh link.
 
 ## Dashboard
 
