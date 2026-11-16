@@ -1,0 +1,14 @@
+# Scan output contains real AWS account details - never commit
+reports/
+ss/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
+*.pem
+credentials
