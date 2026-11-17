@@ -26,6 +26,33 @@
  7 scanners (boto3)  ->  index.py (merge)  ->  security_analyzer.py (severity + advice)  ->  dashboard
 ```
 
+## Quick start
+
+Just want to look around? Open the [live demo](https://likhitha0208.github.io/nimbusScan/demo/). No setup and no AWS account needed.
+
+To scan **your own** AWS account you need Python 3, the [AWS CLI](https://aws.amazon.com/cli/) and an AWS account:
+
+1. **Get the code**
+   ```bash
+   git clone https://github.com/likhitha0208/nimbusScan.git
+   cd nimbusScan
+   pip install -r requirements.txt
+   ```
+2. **Create read-only access.** In the AWS console go to *IAM → Users → Create user*, attach the managed policies `SecurityAudit` and `ViewOnlyAccess`, then create an access key. Avoid using the root account or an admin user.
+3. **Sign in from your terminal**
+   ```bash
+   aws configure                  # paste the access key, secret key and a default region
+   aws sts get-caller-identity    # should print your account and user
+   ```
+4. **Set your region.** The scanners default to `ap-south-1` (Mumbai). Search the scanner files for `ap-south-1` and replace it with the region where your resources live, otherwise you will scan an empty region.
+5. **Scan and open the dashboard**
+   ```bash
+   python dashboard.py --scan
+   ```
+   This runs all seven scanners, builds the analysis, and opens the dashboard in your browser through a one-time link. Keep the terminal open while you use it, and run the command once (a second copy breaks the link).
+
+Results are written to `reports/` on your machine and are never uploaded. See [Usage](#usage) for the individual commands.
+
 ## Live demo
 
 **https://likhitha0208.github.io/nimbusScan/demo/**
