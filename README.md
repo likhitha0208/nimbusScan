@@ -1,12 +1,30 @@
 # NimbusScan
 
-*AWS Cloud Network Security Scanner*
+**A read-only AWS security scanner with a local dashboard.** Scan an account, get every finding ranked by severity with a recommended fix, and review it all in one place.
 
-**Repository:** https://github.com/likhitha0208/nimbusScan
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![boto3](https://img.shields.io/badge/AWS-boto3-FF9900?logo=amazonaws&logoColor=white)
+![Read-only](https://img.shields.io/badge/AWS%20access-read--only-2ea44f)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-A read-only security scanner for an AWS account, built with Python and boto3, with a local web dashboard for reviewing the results.
+### 👉 [Try the live demo](https://likhitha0208.github.io/nimbusScan/demo/) (fictional sample data, no AWS account needed)
 
-It runs seven scanners, merges their JSON output, classifies the findings by severity, and shows everything in a dark SOC-style dashboard.
+![NimbusScan dashboard](docs/screenshots/dashboard.png)
+
+## Highlights
+
+- **7 scanners in one run**: VPC and security groups, network ACLs, IAM, S3, CloudTrail, GuardDuty and AWS Config.
+- **Severity-ranked findings** (Critical / High / Medium / Low / Review / Informational), each with evidence and a remediation tip.
+- **Honest reporting**: services that are not enabled show as *Not evaluated*, never as a green "no findings", and the score is withheld when coverage is incomplete.
+- **Strictly read-only**: only `Describe*`, `List*` and `Get*` API calls, so it never changes your account.
+- **Locked-down dashboard**: localhost only, one-time access link, file allowlist, strict CSP, no third-party resources.
+- **Export** findings as CSV or JSON, with dark and light themes.
+
+## How it works
+
+```
+ 7 scanners (boto3)  ->  index.py (merge)  ->  security_analyzer.py (severity + advice)  ->  dashboard
+```
 
 ## Live demo
 
@@ -16,9 +34,7 @@ A hosted copy of the dashboard running on **fictional sample data** (fake resour
 
 ## Screenshots
 
-**Dashboard**: security overview, severity distribution and per-service scan status.
-
-![Dashboard](docs/screenshots/dashboard.png)
+The dashboard is shown at the top of this page. More views:
 
 **Scan Results**: one row per scanner with status, scan date, resources and findings.
 
